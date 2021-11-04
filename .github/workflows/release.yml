@@ -46,9 +46,9 @@ jobs:
       run: node .github/actions/create-release
       env:
         BODY: ${{ steps.get-version.outputs.version }}
-        DRAFT: inputs.prerelease || false
+        DRAFT: ${{ inputs.draft }} || false
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NAME: ${{ steps.get-version.outputs.version }}
-        PRERELEASE: inputs.prerelease || false
+        PRERELEASE: ${{ inputs.prerelease }} || false
         TAG_NAME: ${{ steps.get-version.outputs.version }}
         TARGET_COMMITISH: "main"
