@@ -1,3 +1,4 @@
+const { setFailed } = require("@actions/core");
 const { Octokit } = require("@octokit/action");
 
 const octokit = new Octokit();
@@ -18,7 +19,7 @@ const createRelease = async () => {
       }
     );
   } catch (error) {
-    console.error(error);
+    return setFailed(error);
   }
 };
 

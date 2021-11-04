@@ -1,4 +1,4 @@
-const { getInput, setFailed, setOutput } = require("@actions/core");
+const { setFailed, setOutput } = require("@actions/core");
 const { resolve } = require("path");
 
 const { version } = require(resolve(
