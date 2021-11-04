@@ -45,7 +45,6 @@ jobs:
     - name: Create release
       run: node .github/actions/create-release
       env:
-        BODY: ${{ steps.get-version.outputs.version }}
         DRAFT: ${{ inputs.draft || false }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NAME: ${{ steps.get-version.outputs.version }}
