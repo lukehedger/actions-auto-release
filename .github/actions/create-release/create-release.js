@@ -7,7 +7,6 @@ const createRelease = async () => {
     const response = await octokit.request(
       "post /repos/{owner}/{repo}/releases",
       {
-        body: process.env.BODY,
         draft: process.env.DRAFT === "true",
         generate_release_notes: true,
         name: process.env.NAME,
