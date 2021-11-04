@@ -8,11 +8,11 @@ const createRelease = async () => {
       "post /repos/{owner}/{repo}/releases",
       {
         body: process.env.BODY,
-        draft: process.env.DRAFT,
+        draft: process.env.DRAFT === "true",
         generate_release_notes: true,
         name: process.env.NAME,
         owner: "lukehedger",
-        prerelease: process.env.PRERELEASE,
+        prerelease: process.env.PRERELEASE === "true",
         repo: "actions-auto-release",
         tag_name: process.env.TAG_NAME,
         target_commitish: process.env.TARGET_COMMITISH,
