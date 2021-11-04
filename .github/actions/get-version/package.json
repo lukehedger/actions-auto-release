@@ -1,0 +1,9 @@
+{
+  "name": "get-version",
+  "private": true,
+  "version": "0.0.0",
+  "main": "get-version.js",
+  "dependencies": {
+    "@actions/core": "1.6.0"
+  }
+}

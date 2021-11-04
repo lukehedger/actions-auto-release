@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      draft:
+        default: false
+        description: 'Is this a draft release?'
+        required: false
+        type: boolean
+      prerelease:
+        default: false
+        description: 'Is this a prerelease?'
+        required: false
+        type: boolean
+
+jobs:
+  release:
+    runs-on: ubuntu-20.04
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    steps:
+    - uses: actions/checkout@v2.3.5
+
+    - name: Setup Node
+      uses: actions/setup-node@v2.4.1
+      with:
+        cache: 'npm'
+        node-version: '14'
+
+    - name: Install GitHub Actions Toolkit for Get Version action
+      run: npm install --prefix .github/actions/get-version
+
+    - name: Get Version
+      id: get-version
+      run: node .github/actions/get-version
+      env:
+        PACKAGE_PATH: $GITHUB_WORKSPACE
+
+    - name: Install GitHub API client for GitHub Actions
+      run: npm install --prefix .github/actions/create-release
+
+    - name: Create release
+      run: node .github/actions/create-release
+      env:
+        BODY: ${{ steps.get-version.outputs.version }}
+        DRAFT: inputs.prerelease || false
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NAME: ${{ steps.get-version.outputs.version }}
+        PRERELEASE: inputs.prerelease || false
+        TAG_NAME: ${{ steps.get-version.outputs.version }}
+        TARGET_COMMITISH: "main"

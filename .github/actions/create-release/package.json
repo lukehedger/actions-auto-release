@@ -1,0 +1,9 @@
+{
+  "name": "create-release",
+  "private": true,
+  "version": "0.0.0",
+  "main": "create-release.js",
+  "dependencies": {
+    "@octokit/action": "3.4.1"
+  }
+}
