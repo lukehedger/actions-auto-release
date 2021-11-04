@@ -37,7 +37,7 @@ jobs:
       id: get-version
       run: node .github/actions/get-version
       env:
-        PACKAGE_PATH: $GITHUB_WORKSPACE
+        PACKAGE_PATH: "./"
 
     - name: Install GitHub API client for GitHub Actions
       run: npm install --prefix .github/actions/create-release
